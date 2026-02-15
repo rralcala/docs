@@ -45,8 +45,8 @@ func main() {
 
 	// GoAdmin global configuration, can also be imported as a json file.
 	cfg := config.Config{
-		Databases: []config.Database{
-			{
+		Databases: map[string]config.Database{
+			"default": {
 				Host:         "127.0.0.1",
 				Port:         "3306",
 				User:         "root",
@@ -67,7 +67,7 @@ func main() {
 	}
 
 	// Add configuration and plugins, use the Use method to mount to the web framework.
-	_ = eng.AddConfig(cfg).
+	_ = eng.AddConfig(&cfg).
 		Use(r)
 
 	_ = r.Run(":9033")
@@ -321,4 +321,4 @@ type RotateCfg struct {
 
 ```
 
-> English is not my main language. If any typo or wrong translation you found, you can help to translate in [github here](https://github.com/GoAdminGroup/docs). I will very appreciate it.
+> English is not my main language. If you find any typo or wrong translation, you can help to translate in [github here](https://github.com/GoAdminGroup/docs). I will appreciate it.
